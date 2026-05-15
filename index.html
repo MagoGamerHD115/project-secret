@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Misión Secreta 💖</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="bg-hearts"></div>
+
+<section class="screen active" id="nivel1">
+  <div class="card">
+    <span class="badge">Nivel 1</span>
+    <h1>💌 Misión Secreta</h1>
+    <p>Ingresa el código especial para comenzar esta aventura.</p>
+    <input type="password" id="codigo" placeholder="Código secreto" />
+    <button onclick="verificarCodigo()">Desbloquear 💖</button>
+    <p class="msg error" id="error"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivel2">
+  <div class="card game-card">
+    <span class="badge">Nivel 2</span>
+    <h1>Atrapa corazones 💕</h1>
+    <p>Toca 10 corazones para continuar.</p>
+    <div id="gameArea"></div>
+    <div class="counter" id="contador">0 / 10</div>
+  </div>
+</section>
+
+<section class="screen" id="nivel3">
+  <div class="card">
+    <span class="badge">Nivel 3</span>
+    <h1>Quiz romántico ✨</h1>
+    <p>¿Quién me hace sonreír de una forma especial?</p>
+    <button onclick="respuestaCorrecta()">Tú 💖</button>
+    <button onclick="respuestaIncorrecta()">Nadie 😅</button>
+    <button onclick="respuestaIncorrecta()">El destino</button>
+    <p class="msg" id="quizMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivel4">
+  <div class="card">
+    <span class="badge">Nivel 4</span>
+    <h1>Frase secreta 🔐</h1>
+    <p>Toca las palabras en el orden correcto.</p>
+
+    <div class="words">
+      <button onclick="elegirPalabra('CONTIGO')">CONTIGO</button>
+      <button onclick="elegirPalabra('QUIERO')">QUIERO</button>
+      <button onclick="elegirPalabra('ESTAR')">ESTAR</button>
+    </div>
+
+    <div class="phrase" id="fraseArmada"></div>
+    <button class="secondary" onclick="reiniciarFrase()">Reiniciar</button>
+    <p class="msg" id="fraseMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivel5">
+  <div class="card">
+    <span class="badge">Nivel 5</span>
+    <h1>Memoria de amor 🧠💖</h1>
+    <p>Encuentra las 3 parejas de emojis.</p>
+    <div class="memory-board" id="memoryBoard"></div>
+    <p class="msg" id="memoryMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivel6">
+  <div class="card">
+    <span class="badge">Nivel 6</span>
+    <h1>Rompecabezas 🧩</h1>
+    <p>Arma la foto tocando las piezas en orden.</p>
+
+    <div class="puzzle" id="puzzle"></div>
+
+    <button class="secondary" onclick="reiniciarPuzzle()">Reiniciar</button>
+    <p class="msg" id="puzzleMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivel7">
+  <div class="card carta">
+    <span class="badge">Nivel 7</span>
+    <h1>💌 Carta para ti</h1>
+
+    <p>
+      Desde el 7 de abril algo cambió en mí.
+      Cada momento contigo se siente especial, bonito y diferente.
+    </p>
+
+    <p>
+      Me gusta tu forma de ser, tu sonrisa y la paz que me das.
+      Por eso hoy quiero decirte algo que llevo en el corazón...
+    </p>
+
+    <button onclick="mostrarNivel(8)">Ver pregunta final 💖</button>
+  </div>
+</section>
+
+<section class="screen" id="nivel8">
+  <div class="card final-card">
+    <span class="badge">Nivel final</span>
+    <h1>✨ Tengo una pregunta ✨</h1>
+    <h2>¿Quieres ser mi novia? 💖</h2>
+
+    <div class="botones">
+      <button class="si" onclick="acepto()">Sí 💕</button>
+      <button class="no" id="btnNo">No 😅</button>
+    </div>
+
+    <p class="final-msg" id="final"></p>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
