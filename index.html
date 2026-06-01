@@ -15,8 +15,12 @@
     <span class="badge">Nivel 1</span>
     <h1>💌 Misión Secreta</h1>
     <p>Ingresa el código especial para comenzar esta aventura.</p>
+
     <input type="password" id="codigo" placeholder="Código secreto" />
+
     <button onclick="verificarCodigo()">Desbloquear 💖</button>
+    <button class="secondary" onclick="activarMusica()">Activar música 🎵</button>
+
     <p class="msg error" id="error"></p>
   </div>
 </section>
@@ -84,6 +88,108 @@
   </div>
 </section>
 
+<section class="screen" id="nivelExtra1">
+  <div class="card game-card perdon-card">
+    <span class="badge">Código 0106 · Parte 1</span>
+    <h1>Perdón de corazón 💌</h1>
+    <p>
+      Quiero pedirte disculpas por la situación y por cómo pasaron las cosas.
+      Perdón de antemano y de todo corazón.
+    </p>
+    <p>Toca 6 mensajes para completar la disculpa.</p>
+
+    <div id="perdonArea"></div>
+
+    <div class="counter" id="contadorPerdon">0 / 6</div>
+    <button class="secondary" onclick="reiniciarPerdon()">Reiniciar</button>
+    <button class="secondary" onclick="mostrarNivel(1)">Volver al inicio</button>
+    <p class="msg" id="perdonMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivelExtra2">
+  <div class="card perdon-card">
+    <span class="badge">Código 0106 · Parte 2</span>
+    <h1>Ordena el perdón 🧩</h1>
+    <p>Toca las palabras en el orden correcto para formar la frase.</p>
+
+    <div class="words">
+      <button onclick="elegirPalabraPerdon('PERDÓN')">PERDÓN</button>
+      <button onclick="elegirPalabraPerdon('PIDO')">PIDO</button>
+      <button onclick="elegirPalabraPerdon('TE')">TE</button>
+      <button onclick="elegirPalabraPerdon('CORAZÓN')">CORAZÓN</button>
+      <button onclick="elegirPalabraPerdon('DE')">DE</button>
+    </div>
+
+    <div class="phrase" id="frasePerdonArmada"></div>
+    <button class="secondary" onclick="reiniciarFrasePerdon()">Reiniciar</button>
+    <p class="msg" id="frasePerdonMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivelExtra3">
+  <div class="card perdon-card">
+    <span class="badge">Código 0106 · Parte 3</span>
+    <h1>Combina las palabras 💖</h1>
+    <p>Forma la frase final para seguir avanzando.</p>
+
+    <div class="words">
+      <button onclick="elegirPalabraFinal('BIEN')">BIEN</button>
+      <button onclick="elegirPalabraFinal('LAS')">LAS</button>
+      <button onclick="elegirPalabraFinal('HACER')">HACER</button>
+      <button onclick="elegirPalabraFinal('QUIERO')">QUIERO</button>
+      <button onclick="elegirPalabraFinal('COSAS')">COSAS</button>
+    </div>
+
+    <div class="phrase" id="fraseFinalArmada"></div>
+    <button class="secondary" onclick="reiniciarFraseFinal()">Reiniciar</button>
+    <p class="msg" id="fraseFinalMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivelExtra4">
+  <div class="card perdon-card">
+    <span class="badge">Código 0106 · Parte 4</span>
+    <h1>Rompecabezas del perdón 🧩💖</h1>
+    <p>Arma la imagen para descubrir el mensaje final.</p>
+
+    <div class="puzzle-extra" id="puzzlePerdon"></div>
+
+    <button class="secondary" onclick="reiniciarPuzzlePerdon()">Reiniciar</button>
+    <p class="msg" id="puzzlePerdonMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivelExtraFinal">
+  <div class="card carta perdon-card">
+    <span class="badge">Mensaje final</span>
+    <h1>Lo siento mucho 💖</h1>
+
+    <p>
+      Estoy arrepentido por lo que hice y por cómo pasaron las cosas.
+      De verdad te pido perdón de todo corazón.
+    </p>
+
+    <p>
+      No lo volveré a hacer más. Desde hoy ya no más mentiras,
+      no más dudas, no más nada que pueda hacerte sentir mal.
+      Quiero cambiar como persona y demostrarlo con hechos.
+    </p>
+
+    <p>
+      Te explicaré todo con sinceridad, porque me importas mucho.
+      Quiero hacer las cosas bien contigo, construir algo bonito,
+      casarnos algún día y tener una linda familia juntos.
+    </p>
+
+    <a href="https://canva.link/paramiamorconnie" target="_blank" class="link-final">
+      Ver algo especial para ti 💖
+    </a>
+
+    <button onclick="mostrarNivel(1)">Volver al inicio 💌</button>
+  </div>
+</section>
+
 <section class="screen" id="nivel7">
   <div class="card carta">
     <span class="badge">Nivel 7</span>
@@ -117,6 +223,10 @@
     <p class="final-msg" id="final"></p>
   </div>
 </section>
+
+<audio id="musicaFondo" loop preload="auto">
+  <source src="./audio/musica.mp3" type="audio/mpeg">
+</audio>
 
 <script src="app.js"></script>
 </body>
