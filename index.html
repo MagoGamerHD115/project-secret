@@ -88,107 +88,134 @@
   </div>
 </section>
 
+<!-- RUTA EXTRA 0906 -->
+
 <section class="screen" id="nivelExtra1">
-  <div class="card game-card perdon-card">
-    <span class="badge">Código 0106 · Parte 1</span>
-    <h1>Perdón de corazón 💌</h1>
-    <p>
-      Quiero pedirte disculpas por la situación y por cómo pasaron las cosas.
-      Perdón de antemano y de todo corazón.
-    </p>
-    <p>Toca 6 mensajes para completar la disculpa.</p>
+  <div class="card aniversario-card">
+    <span class="badge">Código 0906 · Parte 1</span>
+    <h1>Constelación de recuerdos ✨</h1>
+    <p>Toca las estrellas en orden para formar la letra C.</p>
 
-    <div id="perdonArea"></div>
+    <div class="constelacion-area" id="constelacionArea">
+      <button class="estrella estrella1" onclick="tocarEstrella(1)">⭐</button>
+      <button class="estrella estrella2" onclick="tocarEstrella(2)">⭐</button>
+      <button class="estrella estrella3" onclick="tocarEstrella(3)">⭐</button>
+      <button class="estrella estrella4" onclick="tocarEstrella(4)">⭐</button>
+      <button class="estrella estrella5" onclick="tocarEstrella(5)">⭐</button>
 
-    <div class="counter" id="contadorPerdon">0 / 6</div>
-    <button class="secondary" onclick="reiniciarPerdon()">Reiniciar</button>
+      <svg class="lineas-constelacion" viewBox="0 0 300 300">
+        <polyline id="lineaConstelacion" points="" />
+      </svg>
+    </div>
+
+    <p class="mini-info">Toca las estrellas en orden para formar la letra C 💖</p>
+
+    <button class="secondary" onclick="reiniciarConstelacion()">Reiniciar</button>
     <button class="secondary" onclick="mostrarNivel(1)">Volver al inicio</button>
-    <p class="msg" id="perdonMensaje"></p>
+    <p class="msg" id="constelacionMensaje"></p>
   </div>
 </section>
 
 <section class="screen" id="nivelExtra2">
-  <div class="card perdon-card">
-    <span class="badge">Código 0106 · Parte 2</span>
-    <h1>Ordena el perdón 🧩</h1>
-    <p>Toca las palabras en el orden correcto para formar la frase.</p>
+  <div class="card aniversario-card">
+    <span class="badge">Código 0906 · Parte 2</span>
+    <h1>Medidor de amor 💖</h1>
+    <p>Presiona el botón hasta llenar el medidor al 100%.</p>
 
-    <div class="words">
-      <button onclick="elegirPalabraPerdon('PERDÓN')">PERDÓN</button>
-      <button onclick="elegirPalabraPerdon('PIDO')">PIDO</button>
-      <button onclick="elegirPalabraPerdon('TE')">TE</button>
-      <button onclick="elegirPalabraPerdon('CORAZÓN')">CORAZÓN</button>
-      <button onclick="elegirPalabraPerdon('DE')">DE</button>
+    <div class="medidor-amor">
+      <div class="barra-amor" id="barraAmor"></div>
     </div>
 
-    <div class="phrase" id="frasePerdonArmada"></div>
-    <button class="secondary" onclick="reiniciarFrasePerdon()">Reiniciar</button>
-    <p class="msg" id="frasePerdonMensaje"></p>
+    <div class="porcentaje-amor" id="porcentajeAmor">0%</div>
+
+    <button onclick="cargarAmor()">Cargar amor 💕</button>
+    <button class="secondary" onclick="reiniciarMedidorAmor()">Reiniciar</button>
+
+    <div class="efectos-amor" id="efectosAmor"></div>
+    <p class="msg" id="medidorMensaje"></p>
   </div>
 </section>
 
 <section class="screen" id="nivelExtra3">
-  <div class="card perdon-card">
-    <span class="badge">Código 0106 · Parte 3</span>
-    <h1>Combina las palabras 💖</h1>
-    <p>Forma la frase final para seguir avanzando.</p>
+  <div class="card aniversario-card">
+    <span class="badge">Código 0906 · Parte 3</span>
+    <h1>Quiz de nuestro mes ✨</h1>
+    <p>¿Qué celebramos hoy?</p>
 
-    <div class="words">
-      <button onclick="elegirPalabraFinal('BIEN')">BIEN</button>
-      <button onclick="elegirPalabraFinal('LAS')">LAS</button>
-      <button onclick="elegirPalabraFinal('HACER')">HACER</button>
-      <button onclick="elegirPalabraFinal('QUIERO')">QUIERO</button>
-      <button onclick="elegirPalabraFinal('COSAS')">COSAS</button>
-    </div>
+    <button onclick="respuestaAniversarioCorrecta()">Nuestro primer mes juntos 💖</button>
+    <button onclick="respuestaAniversarioIncorrecta()">Un día cualquiera 😅</button>
+    <button onclick="respuestaAniversarioIncorrecta()">Una misión secreta sin razón</button>
 
-    <div class="phrase" id="fraseFinalArmada"></div>
-    <button class="secondary" onclick="reiniciarFraseFinal()">Reiniciar</button>
-    <p class="msg" id="fraseFinalMensaje"></p>
+    <p class="msg" id="quizAniversarioMensaje"></p>
   </div>
 </section>
 
 <section class="screen" id="nivelExtra4">
-  <div class="card perdon-card">
-    <span class="badge">Código 0106 · Parte 4</span>
-    <h1>Rompecabezas del perdón 🧩💖</h1>
-    <p>Arma la imagen para descubrir el mensaje final.</p>
+  <div class="card aniversario-card">
+    <span class="badge">Código 0906 · Parte 4</span>
+    <h1>Ordena la frase 💕</h1>
+    <p>Toca las palabras en el orden correcto para formar el mensaje.</p>
+
+    <div class="words">
+      <button onclick="elegirPalabraAniversario('CONTIGO')">CONTIGO</button>
+      <button onclick="elegirPalabraAniversario('MES')">MES</button>
+      <button onclick="elegirPalabraAniversario('FELIZ')">FELIZ</button>
+      <button onclick="elegirPalabraAniversario('PRIMER')">PRIMER</button>
+    </div>
+
+    <div class="phrase" id="fraseAniversarioArmada"></div>
+
+    <button class="secondary" onclick="reiniciarFraseAniversario()">Reiniciar</button>
+    <p class="msg" id="fraseAniversarioMensaje"></p>
+  </div>
+</section>
+
+<section class="screen" id="nivelExtra5">
+  <div class="card aniversario-card">
+    <span class="badge">Código 0906 · Parte 5</span>
+    <h1>Rompecabezas de aniversario 🧩💖</h1>
+    <p>Arma la imagen para descubrir el mensaje final de nuestro primer mes.</p>
 
     <div class="puzzle-extra" id="puzzlePerdon"></div>
 
     <button class="secondary" onclick="reiniciarPuzzlePerdon()">Reiniciar</button>
+    <button class="secondary" onclick="mostrarNivel(1)">Volver al inicio</button>
     <p class="msg" id="puzzlePerdonMensaje"></p>
   </div>
 </section>
 
 <section class="screen" id="nivelExtraFinal">
-  <div class="card carta perdon-card">
-    <span class="badge">Mensaje final</span>
-    <h1>Lo siento mucho 💖</h1>
+  <div class="card carta aniversario-card">
+    <span class="badge">Mensaje especial</span>
+    <h1>Feliz primer mes 💖</h1>
 
     <p>
-      Estoy arrepentido por lo que hice y por cómo pasaron las cosas.
-      De verdad te pido perdón de todo corazón.
+      Hoy celebramos nuestro primer mes, y quiero decirte que este tiempo contigo
+      ha sido muy especial para mí.
     </p>
 
     <p>
-      No lo volveré a hacer más. Desde hoy ya no más mentiras,
-      no más dudas, no más nada que pueda hacerte sentir mal.
-      Quiero cambiar como persona y demostrarlo con hechos.
+      Gracias por cada momento bonito, por tu forma de ser, por tu cariño
+      y por hacer que mis días tengan algo diferente y especial.
     </p>
 
     <p>
-      Te explicaré todo con sinceridad, porque me importas mucho.
-      Quiero hacer las cosas bien contigo, construir algo bonito,
-      casarnos algún día y tener una linda familia juntos.
+      Este primer mes es solo el comienzo de muchas cosas lindas que quiero vivir contigo.
+      Me alegra tenerte en mi vida y poder construir esta historia poco a poco,
+      con amor, respeto y muchos momentos felices.
     </p>
 
-    <a href="https://canva.link/paramiamorconnie" target="_blank" class="link-final">
-      Ver algo especial para ti 💖
-    </a>
+    <div class="cuadrito-final" onclick="mostrarMensajeMes()">
+      💝 Toca aquí 💝
+    </div>
+
+    <p class="mensaje-mes" id="mensajeMes"></p>
 
     <button onclick="mostrarNivel(1)">Volver al inicio 💌</button>
   </div>
 </section>
+
+<!-- RUTA NORMAL 0704 -->
 
 <section class="screen" id="nivel7">
   <div class="card carta">
