@@ -1,5 +1,5 @@
 const CODIGO_SECRETO = "0704";
-const CODIGO_MINIJUEGO = "0106";
+const CODIGO_MINIJUEGO = "0906";
 
 function activarMusica() {
   const musica = document.getElementById("musicaFondo");
@@ -269,10 +269,7 @@ function reiniciarPuzzle() {
   iniciarPuzzle();
 }
 
-/* MINIJUEGOS EXTRA - CÓDIGO 0106 */
-let perdonIniciado = false;
-let perdonContador = 0;
-let intervaloPerdon = null;
+/* RUTA EXTRA - CÓDIGO 0906 ANIVERSARIO */
 
 function mostrarNivelExtra() {
   document.querySelectorAll(".screen").forEach(screen => {
@@ -280,65 +277,7 @@ function mostrarNivelExtra() {
   });
 
   document.getElementById("nivelExtra1").classList.add("active");
-  iniciarPerdon();
-}
-
-/* MINIJUEGO 1 */
-function iniciarPerdon() {
-  if (perdonIniciado) return;
-
-  perdonIniciado = true;
-  perdonContador = 0;
-
-  const area = document.getElementById("perdonArea");
-  area.innerHTML = "";
-
-  document.getElementById("contadorPerdon").innerText = "0 / 6";
-  document.getElementById("perdonMensaje").innerText = "";
-
-  const mensajes = [
-    "Perdón",
-    "Lo siento",
-    "De corazón",
-    "Te valoro",
-    "Me importas",
-    "Quiero mejorar"
-  ];
-
-  intervaloPerdon = setInterval(() => {
-    const item = document.createElement("div");
-    item.classList.add("perdon-item");
-    item.innerHTML = mensajes[Math.floor(Math.random() * mensajes.length)] + " 💖";
-
-    item.style.left = Math.random() * 62 + "%";
-    item.style.top = Math.random() * 82 + "%";
-
-    item.onclick = () => {
-      item.remove();
-      perdonContador++;
-
-      document.getElementById("contadorPerdon").innerText = perdonContador + " / 6";
-
-      if (perdonContador >= 6) {
-        clearInterval(intervaloPerdon);
-
-        document.getElementById("perdonMensaje").innerText =
-          "Disculpa enviada con el corazón 💌";
-
-        setTimeout(() => mostrarNivelExtraNumero(2), 1200);
-      }
-    };
-
-    area.appendChild(item);
-
-    setTimeout(() => item.remove(), 1700);
-  }, 700);
-}
-
-function reiniciarPerdon() {
-  clearInterval(intervaloPerdon);
-  perdonIniciado = false;
-  iniciarPerdon();
+  iniciarConstelacion();
 }
 
 function mostrarNivelExtraNumero(numero) {
@@ -348,65 +287,170 @@ function mostrarNivelExtraNumero(numero) {
 
   document.getElementById("nivelExtra" + numero).classList.add("active");
 
-  if (numero === 4) {
-    iniciarPuzzlePerdon();
+  if (numero === 1) iniciarConstelacion();
+  if (numero === 2) iniciarMedidorAmor();
+  if (numero === 5) iniciarPuzzlePerdon();
+}
+
+/* MINIJUEGO 1 - CONSTELACIÓN EN FORMA DE C */
+let constelacionOrden = [1, 2, 3, 4, 5];
+let constelacionJugador = [];
+
+let constelacionPuntos = {
+  1: "230,65",
+  2: "120,55",
+  3: "65,145",
+  4: "120,235",
+  5: "230,225"
+};
+
+function iniciarConstelacion() {
+  constelacionJugador = [];
+
+  document.getElementById("constelacionMensaje").innerText = "";
+  document.getElementById("lineaConstelacion").setAttribute("points", "");
+
+  document.querySelectorAll(".estrella").forEach(estrella => {
+    estrella.classList.remove("activa", "error-star");
+  });
+}
+
+function tocarEstrella(numero) {
+  const posicionActual = constelacionJugador.length;
+  const esperado = constelacionOrden[posicionActual];
+  const estrella = document.querySelector(".estrella" + numero);
+
+  if (numero === esperado) {
+    constelacionJugador.push(numero);
+    estrella.classList.add("activa");
+
+    actualizarLineaConstelacion();
+
+    if (constelacionJugador.length === constelacionOrden.length) {
+      document.getElementById("constelacionMensaje").innerText =
+        "Constelación completada ✨ La letra C brilla por nuestro mes 💖";
+
+      setTimeout(() => mostrarNivelExtraNumero(2), 1300);
+    }
+  } else {
+    estrella.classList.add("error-star");
+    document.getElementById("constelacionMensaje").innerText =
+      "Esa estrella no iba todavía 😅 Intenta de nuevo.";
+
+    setTimeout(() => {
+      reiniciarConstelacion();
+    }, 900);
   }
 }
 
-/* MINIJUEGO 2 */
-let frasePerdon = [];
-const frasePerdonCorrecta = ["TE", "PIDO", "PERDÓN", "DE", "CORAZÓN"];
+function actualizarLineaConstelacion() {
+  const puntos = constelacionJugador
+    .map(numero => constelacionPuntos[numero])
+    .join(" ");
 
-function elegirPalabraPerdon(palabra) {
-  frasePerdon.push(palabra);
-  document.getElementById("frasePerdonArmada").innerText = frasePerdon.join(" ");
+  document.getElementById("lineaConstelacion").setAttribute("points", puntos);
+}
 
-  if (frasePerdon.length === frasePerdonCorrecta.length) {
-    if (JSON.stringify(frasePerdon) === JSON.stringify(frasePerdonCorrecta)) {
-      document.getElementById("frasePerdonMensaje").innerText = "Frase correcta 💖";
+function reiniciarConstelacion() {
+  iniciarConstelacion();
+}
 
-      setTimeout(() => mostrarNivelExtraNumero(3), 1000);
+/* MINIJUEGO 2 - MEDIDOR DE AMOR */
+let amorActual = 0;
+
+function iniciarMedidorAmor() {
+  amorActual = 0;
+  document.getElementById("barraAmor").style.width = "0%";
+  document.getElementById("porcentajeAmor").innerText = "0%";
+  document.getElementById("medidorMensaje").innerText = "";
+  document.getElementById("efectosAmor").innerHTML = "";
+}
+
+function cargarAmor() {
+  if (amorActual >= 100) return;
+
+  amorActual += 10;
+
+  if (amorActual > 100) {
+    amorActual = 100;
+  }
+
+  document.getElementById("barraAmor").style.width = amorActual + "%";
+  document.getElementById("porcentajeAmor").innerText = amorActual + "%";
+
+  crearCorazonFlotante();
+
+  if (amorActual === 100) {
+    document.getElementById("medidorMensaje").innerText =
+      "Medidor completo 💖 Amor cargado al máximo.";
+
+    setTimeout(() => mostrarNivelExtraNumero(3), 1200);
+  }
+}
+
+function crearCorazonFlotante() {
+  const efectos = document.getElementById("efectosAmor");
+  const corazon = document.createElement("span");
+
+  corazon.classList.add("corazon-flotante");
+  corazon.innerText = "💖";
+
+  corazon.style.left = Math.random() * 80 + 10 + "%";
+
+  efectos.appendChild(corazon);
+
+  setTimeout(() => {
+    corazon.remove();
+  }, 1000);
+}
+
+function reiniciarMedidorAmor() {
+  iniciarMedidorAmor();
+}
+
+/* MINIJUEGO 3 - QUIZ DE ANIVERSARIO */
+function respuestaAniversarioCorrecta() {
+  document.getElementById("quizAniversarioMensaje").innerText =
+    "Correcto, hoy celebramos nuestro primer mes 💖";
+
+  setTimeout(() => mostrarNivelExtraNumero(4), 1200);
+}
+
+function respuestaAniversarioIncorrecta() {
+  document.getElementById("quizAniversarioMensaje").innerText =
+    "Casi... piensa en algo bonito que cumplimos hoy 😅";
+}
+
+/* MINIJUEGO 4 - ORDENAR FRASE */
+let fraseAniversario = [];
+const fraseAniversarioCorrecta = ["FELIZ", "PRIMER", "MES", "CONTIGO"];
+
+function elegirPalabraAniversario(palabra) {
+  fraseAniversario.push(palabra);
+
+  document.getElementById("fraseAniversarioArmada").innerText =
+    fraseAniversario.join(" ");
+
+  if (fraseAniversario.length === fraseAniversarioCorrecta.length) {
+    if (JSON.stringify(fraseAniversario) === JSON.stringify(fraseAniversarioCorrecta)) {
+      document.getElementById("fraseAniversarioMensaje").innerText =
+        "Frase correcta 💖";
+
+      setTimeout(() => mostrarNivelExtraNumero(5), 1200);
     } else {
-      document.getElementById("frasePerdonMensaje").innerText =
-        "Casi... intenta ordenarla con calma 💕";
+      document.getElementById("fraseAniversarioMensaje").innerText =
+        "Casi... intenta ordenarla mejor 💕";
     }
   }
 }
 
-function reiniciarFrasePerdon() {
-  frasePerdon = [];
-  document.getElementById("frasePerdonArmada").innerText = "";
-  document.getElementById("frasePerdonMensaje").innerText = "";
+function reiniciarFraseAniversario() {
+  fraseAniversario = [];
+  document.getElementById("fraseAniversarioArmada").innerText = "";
+  document.getElementById("fraseAniversarioMensaje").innerText = "";
 }
 
-/* MINIJUEGO 3 */
-let fraseFinalExtra = [];
-const fraseFinalCorrecta = ["QUIERO", "HACER", "LAS", "COSAS", "BIEN"];
-
-function elegirPalabraFinal(palabra) {
-  fraseFinalExtra.push(palabra);
-  document.getElementById("fraseFinalArmada").innerText = fraseFinalExtra.join(" ");
-
-  if (fraseFinalExtra.length === fraseFinalCorrecta.length) {
-    if (JSON.stringify(fraseFinalExtra) === JSON.stringify(fraseFinalCorrecta)) {
-      document.getElementById("fraseFinalMensaje").innerText =
-        "Mensaje completado con amor 💌";
-
-      setTimeout(() => mostrarNivelExtraNumero(4), 1000);
-    } else {
-      document.getElementById("fraseFinalMensaje").innerText =
-        "Intenta otra vez, la frase tiene un mensaje bonito 💖";
-    }
-  }
-}
-
-function reiniciarFraseFinal() {
-  fraseFinalExtra = [];
-  document.getElementById("fraseFinalArmada").innerText = "";
-  document.getElementById("fraseFinalMensaje").innerText = "";
-}
-
-/* MINIJUEGO 4 - ROMPECABEZAS DEL PERDÓN */
+/* MINIJUEGO 5 - ROMPECABEZAS DE ANIVERSARIO */
 let puzzlePerdonIniciado = false;
 const posicionesPerdonCorrectas = [0,1,2,3,4,5,6,7,8];
 let piezasPerdon = [];
@@ -469,7 +513,7 @@ function verificarPuzzlePerdonCompleto() {
 
   if (completo) {
     document.getElementById("puzzlePerdonMensaje").innerText =
-      "🧩 Imagen completada. Gracias por llegar hasta aquí 💖";
+      "🧩 ¡Imagen completada! Feliz primer mes 💖";
 
     setTimeout(() => {
       mostrarNivelExtraFinal();
@@ -492,6 +536,14 @@ function mostrarNivelExtraFinal() {
   });
 
   document.getElementById("nivelExtraFinal").classList.add("active");
+}
+
+/* CUADRITO FINAL */
+function mostrarMensajeMes() {
+  const mensaje = document.getElementById("mensajeMes");
+
+  mensaje.innerText = "Feliz mes juntos amor 💖";
+  mensaje.classList.add("mostrar-mensaje");
 }
 
 /* NIVEL FINAL */
